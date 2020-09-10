@@ -16,6 +16,10 @@ public class playerController : MonoBehaviour
     {
         body = transform.GetComponent<Rigidbody>();
         InvokeRepeating("trackPos", 0, posRecordFrequency);
+        if (isMaster == false)
+            transform.position = positionRecordings[0];
+
+
     }
 
     void movement()
@@ -50,24 +54,26 @@ public class playerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            var newCopy = Instantiate(robotPrefab);
-            var script = newCopy.GetComponent<playerController>();
-            script.isMaster = true;
+            var newCopy = Instantiate(robotPrefab, positionRecordings[0], Quaternion.identity);
+            newCopy.GetComponent<playerController>().isMaster = true;
             this.isMaster = false;
-            transform.position = positionRecordings[0];
+            body.velocity = Vector3.zero;
+            positionRecordings.RemoveAt(positionRecordings.Count - 1);
+
         }
     }
 
     void replayMovements()
     {
-        if (Time.time - lastFrameTime >= posRecordFrequency)
+        //if (Time.time - lastFrameTime >= posRecordFrequency)
+        //lastFrameTime = Time.time;
+        if (currentFrame < positionRecordings.Count)
         {
-            lastFrameTime = Time.time;
             body.position = positionRecordings[currentFrame];
             currentFrame++;
-            Debug.Log("Frame num: " + currentFrame);
-            Debug.Log("Frame length: " + positionRecordings.Count);
         }
+        //Debug.Log("Frame num: " + currentFrame);
+        //Debug.Log("Frame length: " + positionRecordings.Count);
     }
 
     // Update is called once per frame
@@ -83,5 +89,7 @@ public class playerController : MonoBehaviour
         {
             replayMovements();
         }
+        //Debug.Log(name + " is master? " + isMaster);
+
     }
 }
