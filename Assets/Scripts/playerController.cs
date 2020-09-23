@@ -20,8 +20,12 @@ public class playerController : MonoBehaviour
         body = transform.GetComponent<Rigidbody>();
         InvokeRepeating("trackPos", 0, posRecordFrequency);
         if (isMaster == false)
+        {
             transform.position = positionRecordings[0];
-
+        }
+        var skins = globals.robotSkins;
+        this.GetComponent<Renderer>().material.color = skins[globals.robotCount % skins.Length];
+        globals.robotCount++;
         //Debug.Log("length of recording: " + positionRecordings.Count);
 
     }
@@ -53,37 +57,51 @@ public class playerController : MonoBehaviour
     void trackPos()
     {
         //track the position of the player in case a robot has to copy it
-        positionRecordings.Add(body.position);
+        if (Time.time - lastFrameTime >= posRecordFrequency)
+        {
+            positionRecordings.Add(body.position);
+            //lastFrameTime = Time.tm
+        }
 
     }
     void makeClone()
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            //make a clone of the  player that will replay the movements that were just done
-            var newCopy = Instantiate(robotPrefab, positionRecordings[0], Quaternion.identity);
-            //newCopy.GetComponent<playerController>().isMaster = true;
-            this.isMaster = false;
-            body.velocity = Vector3.zero;
-
-            //using a for loop because I have been burned in the past from untiy not allowing me to stop a while loop
-            //during run time and crashing the program
-            for (int i = 0; i < 10; i++)
+            if (globals.robotCount + 1 <= globals.robotsPerLevel[globals.currentLevel])
             {
-                positionRecordings.RemoveAt(positionRecordings.Count - 1);
-                if (positionRecordings[positionRecordings.Count - 1] != positionRecordings[0])
-                    break;
+
+                //make a clone of the  player that will replay the movements that were just done
+                var newCopy = Instantiate(robotPrefab, positionRecordings[0], Quaternion.identity);
+                //newCopy.GetComponent<playerController>().isMaster = true;
+                this.isMaster = false;
+                body.velocity = Vector3.zero;
+                CancelInvoke("trackPos");
+                //InvokeRepeating("replayMovements", 0, posRecordFrequency);
+
+                //using a for loop because I have been burned in the past from untiy not allowing me to stop a while loop
+                //during run time and crashing the program
+                for (int i = 0; i < 10; i++)
+                {
+                    positionRecordings.RemoveAt(positionRecordings.Count - 1);
+                    if (positionRecordings[positionRecordings.Count - 1] != positionRecordings[0])
+                        break;
+
+                }
+                //Debug.Log("length of recording after: " + positionRecordings.Count);
+
+                //reset all of the clones to their starting positions
+                var robots = GameObject.FindGameObjectsWithTag("Player");
+                foreach (GameObject r in robots)
+                {
+                    r.GetComponent<playerController>().currentFrame = 0;
+                }
 
             }
-            Debug.Log("length of recording after: " + positionRecordings.Count);
-
-            //reset all of the clones to their starting positions
-            var robots = GameObject.FindGameObjectsWithTag("Player");
-            foreach (GameObject r in robots)
+            else
             {
-                r.GetComponent<playerController>().currentFrame = 0;
+                //TODO: add way of telling player they can not use any more clones
             }
-
 
         }
     }
@@ -94,10 +112,8 @@ public class playerController : MonoBehaviour
         if (currentFrame < positionRecordings.Count)
         {
             body.position = this.positionRecordings[currentFrame];
-            Debug.Log("current frame: " + currentFrame + " " + positionRecordings[currentFrame]);
+            //Debug.Log("current frame: " + currentFrame + " " + positionRecordings[currentFrame]);
             currentFrame++;
-
-
 
         }
         else
@@ -106,11 +122,11 @@ public class playerController : MonoBehaviour
             if (finishedReplaying == false)
             {
                 finishedReplaying = true;
-                Debug.Log("printing " + positionRecordings.Count + " things");
+                //Debug.Log("printing " + positionRecordings.Count + " things");
 
                 foreach (var item in positionRecordings)
                 {
-                    Debug.Log(item);
+                    //Debug.Log(item);
                 }
             }
         }
