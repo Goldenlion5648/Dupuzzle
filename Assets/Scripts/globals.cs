@@ -11,7 +11,7 @@ public class globals : MonoBehaviour
 
     public static Dictionary<int, int> robotsPerLevel = new Dictionary<int, int>()
     {
-        { 1,2 },
+        { 1,4 },
         { 2,3 },
         { 3,4 },
     };
