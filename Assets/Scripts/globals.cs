@@ -9,6 +9,8 @@ public class globals : MonoBehaviour
     public static int robotCount = 0;
     public static int currentLevel = 1;
 
+    public static List<(float, int)> teleporterUseTime = new List<(float, int)>();
+
     public static Dictionary<int, int> robotsPerLevel = new Dictionary<int, int>()
     {
         { 1,4 },
@@ -17,6 +19,11 @@ public class globals : MonoBehaviour
     };
     // Start is called before the first frame update
     void Start()
+    {
+
+    }
+
+    void trackTeleporterUseTime()
     {
 
     }

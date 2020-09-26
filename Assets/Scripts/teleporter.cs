@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class teleporter : MonoBehaviour
 {
 
     public Transform connectedTeleporter;
     public float cooldown = 0;
+    public int maxUses = 4;
     const float defaultCooldownSeconds = 5;
 
     // Start is called before the first frame update
@@ -15,13 +17,14 @@ public class teleporter : MonoBehaviour
         InvokeRepeating("decCooldown", 0.1f, 1);
 
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         //if ()
-        Debug.Log(other.gameObject.name);
+        //Debug.Log(other.gameObject.name);
 
         //robot layer
-        if (other.gameObject.layer == 8 && cooldown == 0)
+        if (other.gameObject.layer == 8 && cooldown == 0 &&
+            GetComponent<BoxCollider>().bounds.Contains(other.gameObject.transform.position))
         {
             Debug.Log("Collided");
             if (other.gameObject.GetComponent<playerController>().isMaster)
@@ -32,8 +35,23 @@ public class teleporter : MonoBehaviour
 
 
                 cooldown = defaultCooldownSeconds;
-                connectedTeleporter.parent.GetChild(1).GetComponent<teleporter>().cooldown = cooldown;
-
+                maxUses -= 1;
+                var porters = connectedTeleporter.parent.GetComponentsInChildren<teleporter>();
+                foreach (var item in porters)
+                {
+                    item.cooldown = cooldown;
+                    item.maxUses = maxUses;
+                }
+                var textObjects = transform.parent.GetComponentsInChildren<TextMeshPro>();
+                foreach (var item in textObjects)
+                {
+                    item.text = maxUses.ToString();
+                }
+                var textScripts = connectedTeleporter.parent.GetComponentsInChildren<TextMeshPro>();
+                foreach (var item in textScripts)
+                {
+                    item.text = maxUses.ToString();
+                }
             }
         }
     }
@@ -41,6 +59,8 @@ public class teleporter : MonoBehaviour
     void decCooldown()
     {
         cooldown = Mathf.Max(cooldown - 1, 0);
+        //Debug.Log("cooldown " + cooldown);
+
     }
 
     //private void OnTrigger(Collider other)
