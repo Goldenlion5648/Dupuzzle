@@ -17,14 +17,17 @@ public class teleporter : MonoBehaviour
         InvokeRepeating("decCooldown", 0.1f, 1);
 
     }
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         //if ()
         //Debug.Log(other.gameObject.name);
 
         //robot layer
-        if (other.gameObject.layer == 8 && cooldown == 0 &&
-            GetComponent<BoxCollider>().bounds.Contains(other.gameObject.transform.position))
+
+        //instead of triggering for entering teleporter, change to ontrigger enter and add the line
+        //&& GetComponent<BoxCollider>().bounds.Contains(other.gameObject.transform.position)
+        //to this if statement
+        if (other.gameObject.layer == 8 && cooldown == 0)
         {
             Debug.Log("Collided");
             if (other.gameObject.GetComponent<playerController>().isMaster)
