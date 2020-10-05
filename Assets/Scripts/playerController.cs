@@ -28,7 +28,10 @@ public class playerController : MonoBehaviour
             transform.position = positionRecordings[0].Item1;
         }
         var skins = globals.robotSkins;
-        this.GetComponent<Renderer>().material.color = skins[globals.robotCount % skins.Length];
+        this.transform.Find("ToonBot(Free)/robotMesh").GetComponent<Renderer>().material.color =
+            skins[globals.robotCount % skins.Length];
+
+        //this.get<Renderer>().material.color = skins[globals.robotCount % skins.Length];
         globals.robotCount++;
         //Debug.Log("length of recording: " + positionRecordings.Count);
 

@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class buttonScripts : MonoBehaviour
+public class ExitDoorScript : MonoBehaviour
 {
-    public GameObject[] linkedWalls;
     Transform visibleButton;
     bool isTriggered = false;
 
@@ -26,36 +25,25 @@ public class buttonScripts : MonoBehaviour
 
         if (other.gameObject.layer == 8 && pressCooldown == 0)
         {
-            isTriggered = true;
-            if (linkedWalls[0] != null)
-            {
-                //Destroy(linkedWall);
-                foreach (var item in linkedWalls)
-                {
-
-                    item.SetActive(false);
-                    globals.objectsToActive.Add(item);
-
-                }
-            }
+            //TODO: go to next level
         }
 
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == 8)
-        {
-            Debug.Log("left trigger");
+        //if (other.gameObject.layer == 8)
+        //{
+        //    Debug.Log("left trigger");
 
-            isTriggered = false;
-            pressCooldown = 1;
-            foreach (var item in linkedWalls)
-            {
+        //    isTriggered = false;
+        //    pressCooldown = 1;
+        //    foreach (var item in linkedWalls)
+        //    {
 
-                item.SetActive(true);
-            }
-        }
+        //        item.SetActive(true);
+        //    }
+        //}
 
     }
 
