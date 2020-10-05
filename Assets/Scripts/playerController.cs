@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class playerController : MonoBehaviour
 {
-    List<Vector3> positionRecordings = new List<Vector3>();
+    List<(Vector3, Quaternion)> positionRecordings = new List<(Vector3, Quaternion)>();
     // Start is called before the first frame update
     Rigidbody body;
     public GameObject robotPrefab;
@@ -15,18 +15,27 @@ public class playerController : MonoBehaviour
 
     bool finishedReplaying = false;
 
+    private Animator robotAnimator;
+    private Transform robotTransform;
+    private Vector3 lastPos;
+
     void Start()
     {
         body = transform.GetComponent<Rigidbody>();
         InvokeRepeating("trackPos", 0, posRecordFrequency);
         if (isMaster == false)
         {
-            transform.position = positionRecordings[0];
+            transform.position = positionRecordings[0].Item1;
         }
         var skins = globals.robotSkins;
         this.GetComponent<Renderer>().material.color = skins[globals.robotCount % skins.Length];
         globals.robotCount++;
         //Debug.Log("length of recording: " + positionRecordings.Count);
+
+        robotAnimator = this.gameObject.GetComponentInChildren<Animator>();
+        robotTransform = GetComponentInChildren<Transform>();
+
+        lastPos = transform.position;
 
     }
 
@@ -39,19 +48,35 @@ public class playerController : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             body.velocity += new Vector3(0, 0, speed);
+            //robotAnimator.SetInteger("Speed", 1);
+            robotTransform.rotation = Quaternion.Euler(0, 0, 0);
+
         }
         if (Input.GetKey(KeyCode.S))
         {
             body.velocity += new Vector3(0, 0, -speed);
+            //robotAnimator.SetInteger("Speed", 1);
+            robotTransform.rotation = Quaternion.Euler(0, 180, 0);
+
         }
         if (Input.GetKey(KeyCode.A))
         {
             body.velocity += new Vector3(-speed, 0, 0);
+            //robotAnimator.SetInteger("Speed", 1);
+            robotTransform.rotation = Quaternion.Euler(0, -90, 0);
+
         }
         if (Input.GetKey(KeyCode.D))
         {
             body.velocity += new Vector3(speed, 0, 0);
+            //robotAnimator.SetInteger("Speed", 1);
+            robotTransform.rotation = Quaternion.Euler(0, 90, 0);
+
+
         }
+
+        //Debug.Log(robotTransform.rotation);
+
     }
 
     void trackPos()
@@ -59,11 +84,12 @@ public class playerController : MonoBehaviour
         //track the position of the player in case a robot has to copy it
         if (Time.time - lastFrameTime >= posRecordFrequency)
         {
-            positionRecordings.Add(body.position);
+            positionRecordings.Add((body.position, transform.rotation));
             //lastFrameTime = Time.tm
         }
 
     }
+
     void makeClone()
     {
         if (Input.GetKeyDown(KeyCode.T))
@@ -72,7 +98,7 @@ public class playerController : MonoBehaviour
             {
 
                 //make a clone of the  player that will replay the movements that were just done
-                var newCopy = Instantiate(robotPrefab, positionRecordings[0], Quaternion.identity);
+                var newCopy = Instantiate(robotPrefab, positionRecordings[0].Item1, Quaternion.identity);
                 //newCopy.GetComponent<playerController>().isMaster = true;
                 this.isMaster = false;
                 body.velocity = Vector3.zero;
@@ -97,6 +123,9 @@ public class playerController : MonoBehaviour
                     r.GetComponent<playerController>().currentFrame = 0;
                 }
 
+                globals.reactivateObjects();
+
+
             }
             else
             {
@@ -111,7 +140,8 @@ public class playerController : MonoBehaviour
         //playback movements 
         if (currentFrame < positionRecordings.Count)
         {
-            body.position = this.positionRecordings[currentFrame];
+            body.position = this.positionRecordings[currentFrame].Item1;
+            body.rotation = this.positionRecordings[currentFrame].Item2;
             //Debug.Log("current frame: " + currentFrame + " " + positionRecordings[currentFrame]);
             currentFrame++;
 
@@ -134,6 +164,20 @@ public class playerController : MonoBehaviour
         //Debug.Log("Frame length: " + positionRecordings.Count);
     }
 
+    void playAnimation()
+    {
+        if (lastPos != transform.position)
+        {
+            robotAnimator.SetInteger("Speed", 1);
+
+            lastPos = transform.position;
+        }
+        else
+        {
+            robotAnimator.SetInteger("Speed", 0);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -148,6 +192,8 @@ public class playerController : MonoBehaviour
         {
             replayMovements();
         }
+
+        //playAnimation();
         //Debug.Log(name + " is master? " + isMaster);
 
     }

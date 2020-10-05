@@ -9,6 +9,7 @@ public class teleporter : MonoBehaviour
     public Transform connectedTeleporter;
     public float cooldown = 0;
     public int maxUses = 4;
+    public int currentTimesUsed = 0;
     const float defaultCooldownSeconds = 5;
 
     // Start is called before the first frame update
@@ -30,7 +31,7 @@ public class teleporter : MonoBehaviour
         if (other.gameObject.layer == 8 && cooldown == 0)
         {
             Debug.Log("Collided");
-            if (other.gameObject.GetComponent<playerController>().isMaster)
+            if (other.gameObject.GetComponent<playerController>().isMaster && currentTimesUsed + 1 <= maxUses)
             {
                 other.gameObject.transform.position = connectedTeleporter.position +
                     new Vector3(0, other.gameObject.transform.localScale.y + .5f, 0);
@@ -38,22 +39,22 @@ public class teleporter : MonoBehaviour
 
 
                 cooldown = defaultCooldownSeconds;
-                maxUses -= 1;
+                currentTimesUsed += 1;
                 var porters = connectedTeleporter.parent.GetComponentsInChildren<teleporter>();
                 foreach (var item in porters)
                 {
                     item.cooldown = cooldown;
-                    item.maxUses = maxUses;
+                    item.currentTimesUsed = currentTimesUsed;
                 }
                 var textObjects = transform.parent.GetComponentsInChildren<TextMeshPro>();
                 foreach (var item in textObjects)
                 {
-                    item.text = maxUses.ToString();
+                    item.text = (maxUses - currentTimesUsed).ToString();
                 }
                 var textScripts = connectedTeleporter.parent.GetComponentsInChildren<TextMeshPro>();
                 foreach (var item in textScripts)
                 {
-                    item.text = maxUses.ToString();
+                    item.text = (maxUses - currentTimesUsed).ToString();
                 }
             }
         }

@@ -28,7 +28,12 @@ public class buttonScripts : MonoBehaviour
         {
             isTriggered = true;
             if (linkedWall != null)
-                Destroy(linkedWall);
+            {
+                //Destroy(linkedWall);
+                linkedWall.SetActive(false);
+                globals.objectsToActive.Add(linkedWall);
+
+            }
         }
 
     }
@@ -41,7 +46,9 @@ public class buttonScripts : MonoBehaviour
 
             isTriggered = false;
             pressCooldown = 1;
+            linkedWall.SetActive(true);
         }
+
     }
 
     void cooldown()
