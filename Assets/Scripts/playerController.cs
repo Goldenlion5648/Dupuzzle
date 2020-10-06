@@ -19,6 +19,7 @@ public class playerController : MonoBehaviour
     private Transform robotTransform;
     private Vector3 lastPos;
 
+
     void Start()
     {
         body = transform.GetComponent<Rigidbody>();
@@ -39,6 +40,8 @@ public class playerController : MonoBehaviour
         robotTransform = GetComponentInChildren<Transform>();
 
         lastPos = transform.position;
+
+        globals.curPlayerTransform = transform;
 
     }
 
@@ -181,6 +184,12 @@ public class playerController : MonoBehaviour
         }
     }
 
+    void moveCamera()
+    {
+        Camera.main.transform.position = transform.position + globals.cameraOffset;
+
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -190,12 +199,12 @@ public class playerController : MonoBehaviour
             movement();
             trackPos();
             makeClone();
+            moveCamera();
         }
         else
         {
             replayMovements();
         }
-
         //playAnimation();
         //Debug.Log(name + " is master? " + isMaster);
 

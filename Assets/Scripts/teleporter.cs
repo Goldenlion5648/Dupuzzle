@@ -16,6 +16,7 @@ public class teleporter : MonoBehaviour
     void Start()
     {
         InvokeRepeating("decCooldown", 0.1f, 1);
+        updateText();
 
     }
     private void OnTriggerEnter(Collider other)
@@ -46,19 +47,25 @@ public class teleporter : MonoBehaviour
                     item.cooldown = cooldown;
                     item.currentTimesUsed = currentTimesUsed;
                 }
-                var textObjects = transform.parent.GetComponentsInChildren<TextMeshPro>();
-                foreach (var item in textObjects)
-                {
-                    item.text = (maxUses - currentTimesUsed).ToString();
-                }
-                var textScripts = connectedTeleporter.parent.GetComponentsInChildren<TextMeshPro>();
-                foreach (var item in textScripts)
-                {
-                    item.text = (maxUses - currentTimesUsed).ToString();
-                }
+                updateText();
             }
         }
     }
+
+    void updateText()
+    {
+        var textObjects = transform.parent.GetComponentsInChildren<TextMeshPro>();
+        foreach (var item in textObjects)
+        {
+            item.text = (maxUses - currentTimesUsed).ToString();
+        }
+        var textScripts = connectedTeleporter.parent.GetComponentsInChildren<TextMeshPro>();
+        foreach (var item in textScripts)
+        {
+            item.text = (maxUses - currentTimesUsed).ToString();
+        }
+    }
+
 
     void decCooldown()
     {
