@@ -27,6 +27,8 @@ public class buttonScripts : MonoBehaviour
         if (other.gameObject.layer == 8 && pressCooldown == 0)
         {
             isTriggered = true;
+            //Debug.Log("Stop " + Time.time);
+
             if (linkedWalls[0] != null)
             {
                 //Destroy(linkedWall);
@@ -46,7 +48,7 @@ public class buttonScripts : MonoBehaviour
     {
         if (other.gameObject.layer == 8)
         {
-            Debug.Log("left trigger");
+            //Debug.Log("left trigger");
 
             isTriggered = false;
             pressCooldown = 1;

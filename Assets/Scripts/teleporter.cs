@@ -10,7 +10,7 @@ public class teleporter : MonoBehaviour
     public float cooldown = 0;
     public int maxUses = 4;
     public int currentTimesUsed = 0;
-    const float defaultCooldownSeconds = 5;
+    const float defaultCooldownSeconds = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -31,12 +31,12 @@ public class teleporter : MonoBehaviour
         //to this if statement
         if (other.gameObject.layer == 8 && cooldown == 0)
         {
-            Debug.Log("Collided");
+            //Debug.Log("Collided");
             if (other.gameObject.GetComponent<playerController>().isMaster && currentTimesUsed + 1 <= maxUses)
             {
                 other.gameObject.transform.position = connectedTeleporter.position +
                     new Vector3(0, other.gameObject.transform.localScale.y + .5f, 0);
-                Debug.Log("Teleported");
+                //Debug.Log("Teleported");
 
 
                 cooldown = defaultCooldownSeconds;
@@ -65,7 +65,6 @@ public class teleporter : MonoBehaviour
             item.text = (maxUses - currentTimesUsed).ToString();
         }
     }
-
 
     void decCooldown()
     {

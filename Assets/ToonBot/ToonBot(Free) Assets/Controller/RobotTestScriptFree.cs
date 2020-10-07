@@ -33,7 +33,7 @@ public class RobotTestScriptFree : MonoBehaviour
             lastMoveUpdate = Time.time;
         }
 
-        if (Time.time - lastMoveUpdate >= .1)
+        if (Time.time - lastMoveUpdate >= .05)
         {
             anim.SetInteger("Speed", 0);
 

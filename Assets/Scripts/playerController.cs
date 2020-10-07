@@ -19,6 +19,8 @@ public class playerController : MonoBehaviour
     private Transform robotTransform;
     private Vector3 lastPos;
 
+    private bool hasChangedToTransparent = false;
+
 
     void Start()
     {
@@ -27,12 +29,20 @@ public class playerController : MonoBehaviour
         if (isMaster == false)
         {
             transform.position = positionRecordings[0].Item1;
+            //changeToTransparent();
+            Debug.Log("Some how ran start when not master");
+
         }
-        var skins = globals.robotSkins;
-        this.transform.Find("ToonBot(Free)/robotMesh").GetComponent<Renderer>().material.color =
-            skins[globals.robotCount % skins.Length];
+
+
+        //Debug.Log("Color: " + this.transform.Find("ToonBot(Free)/robotMesh").GetComponent<Renderer>().material.color);
 
         //this.get<Renderer>().material.color = skins[globals.robotCount % skins.Length];
+        //changeToTransparent();
+        var skins = globals.robotSkins;
+
+        var render = this.transform.Find("ToonBot(Free)/robotMesh").GetComponent<Renderer>();
+        render.material.color = skins[globals.robotCount % skins.Length];
         globals.robotCount++;
         //Debug.Log("length of recording: " + positionRecordings.Count);
 
@@ -45,10 +55,27 @@ public class playerController : MonoBehaviour
 
     }
 
+    void changeToTransparent()
+    {
+        Debug.Log("changed to transparent");
+
+        var render = this.transform.Find("ToonBot(Free)/robotMesh").GetComponent<Renderer>();
+        render.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+        render.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        render.material.SetInt("_ZWrite", 0);
+        render.material.DisableKeyword("_ALPHATEST_ON");
+        render.material.DisableKeyword("_ALPHABLEND_ON");
+        render.material.EnableKeyword("_ALPHAPREMULTIPLY_ON");
+        render.material.renderQueue = 3000;
+    }
+
     void movement()
     {
+        if (Time.time < .5)
+            return;
         //controls for the robot the player is currently controlling
-        var speed = 3.0f;
+        var speed = 600.0f * Time.deltaTime;
+        //var speed = 3.0f;
         body.velocity = new Vector3(0, 0, 0);
 
         if (Input.GetKey(KeyCode.W))
@@ -63,6 +90,8 @@ public class playerController : MonoBehaviour
             body.velocity += new Vector3(0, 0, -speed);
             //robotAnimator.SetInteger("Speed", 1);
             robotTransform.rotation = Quaternion.Euler(0, 180, 0);
+            //Debug.Log(Time.time);
+
 
         }
         if (Input.GetKey(KeyCode.A))
@@ -105,11 +134,10 @@ public class playerController : MonoBehaviour
 
                 //make a clone of the  player that will replay the movements that were just done
                 var newCopy = Instantiate(robotPrefab, positionRecordings[0].Item1, Quaternion.identity);
-                //newCopy.GetComponent<playerController>().isMaster = true;
                 this.isMaster = false;
+                //changeToTransparent();
                 body.velocity = Vector3.zero;
                 CancelInvoke("trackPos");
-                //InvokeRepeating("replayMovements", 0, posRecordFrequency);
 
                 //using a for loop because I have been burned in the past from untiy not allowing me to stop a while loop
                 //during run time and crashing the program
@@ -203,6 +231,11 @@ public class playerController : MonoBehaviour
         }
         else
         {
+            if (hasChangedToTransparent == false)
+            {
+                changeToTransparent();
+                hasChangedToTransparent = true;
+            }
             replayMovements();
         }
         //playAnimation();
