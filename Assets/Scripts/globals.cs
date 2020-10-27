@@ -5,11 +5,15 @@ using UnityEngine;
 public class globals : MonoBehaviour
 {
 
+    //***transparency is adjusted in function below****
     public static Color[] robotSkins = { Color.red, Color.blue, Color.green, new Color(.5f, 0, .5f) };
-    public static int robotCount = 0;
+
+    public int robotCount = 1;
     public static int currentLevel = 1;
     public static Vector3 cameraOffset;
     public static Transform curPlayerTransform;
+
+    public static float lastCloneTime = -1;
 
     public static List<GameObject> objectsToActive = new List<GameObject>();
 
@@ -28,7 +32,7 @@ public class globals : MonoBehaviour
         //Debug.Log("ran");
         for (int i = 0; i < robotSkins.Length; i++)
         {
-            robotSkins[i].a = .5f;
+            robotSkins[i].a = .4f;
         }
 
         var camPos = Camera.main.transform.position;
@@ -50,7 +54,8 @@ public class globals : MonoBehaviour
     {
         foreach (var item in objectsToActive)
         {
-            item.SetActive(true);
+            if (item != null)
+                item.SetActive(true);
 
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class playerController : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class playerController : MonoBehaviour
     Rigidbody body;
     public GameObject robotPrefab;
     public bool isMaster = true;
-    float posRecordFrequency = .2f;
+    float posRecordFrequency = .1f;
     public int currentFrame = 0;
     float lastFrameTime = 0;
 
@@ -19,8 +20,9 @@ public class playerController : MonoBehaviour
     private Transform robotTransform;
     private Vector3 lastPos;
 
-    private bool hasChangedToTransparent = false;
+    private float restartTime = 0;
 
+    private bool hasChangedToTransparent = false;
 
     void Start()
     {
@@ -39,11 +41,11 @@ public class playerController : MonoBehaviour
 
         //this.get<Renderer>().material.color = skins[globals.robotCount % skins.Length];
         //changeToTransparent();
-        var skins = globals.robotSkins;
+        //var skins = globals.robotSkins;
 
-        var render = this.transform.Find("ToonBot(Free)/robotMesh").GetComponent<Renderer>();
-        render.material.color = skins[globals.robotCount % skins.Length];
-        globals.robotCount++;
+        //var render = this.transform.Find("ToonBot(Free)/robotMesh").GetComponent<Renderer>();
+        //render.material.color = skins[globals.robotCount % skins.Length];
+        //globals.robotCount++;
         //Debug.Log("length of recording: " + positionRecordings.Count);
 
         robotAnimator = this.gameObject.GetComponentInChildren<Animator>();
@@ -57,7 +59,7 @@ public class playerController : MonoBehaviour
 
     void changeToTransparent()
     {
-        Debug.Log("changed to transparent");
+        //Debug.Log("changed to transparent");
 
         var render = this.transform.Find("ToonBot(Free)/robotMesh").GetComponent<Renderer>();
         render.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
@@ -74,8 +76,8 @@ public class playerController : MonoBehaviour
         if (Time.time < .5)
             return;
         //controls for the robot the player is currently controlling
-        var speed = 600.0f * Time.deltaTime;
-        //var speed = 3.0f;
+        //var speed = 700.0f * Time.deltaTime;
+        var speed = 7.0f;
         body.velocity = new Vector3(0, 0, 0);
 
         if (Input.GetKey(KeyCode.W))
@@ -92,7 +94,6 @@ public class playerController : MonoBehaviour
             robotTransform.rotation = Quaternion.Euler(0, 180, 0);
             //Debug.Log(Time.time);
 
-
         }
         if (Input.GetKey(KeyCode.A))
         {
@@ -107,7 +108,25 @@ public class playerController : MonoBehaviour
             //robotAnimator.SetInteger("Speed", 1);
             robotTransform.rotation = Quaternion.Euler(0, 90, 0);
 
+        }
 
+
+
+        //body.velocity = new Vector3(Mathf.Min(body.velocity.x, speed), 0, Mathf.Min(body.velocity.z, speed * 2));
+
+        if (Input.GetKey(KeyCode.R))
+        {
+            restartTime += Time.deltaTime;
+            if (restartTime >= 2)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                restartTime = 0;
+            }
+
+        }
+        else
+        {
+            restartTime = 0;
         }
 
         //Debug.Log(robotTransform.rotation);
@@ -129,7 +148,9 @@ public class playerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            if (globals.robotCount + 1 <= globals.robotsPerLevel[globals.currentLevel])
+            var globalFloor = GameObject.Find("LevelLayout").GetComponentInChildren<globals>();
+            if (globalFloor.robotCount + 1 <= globals.robotsPerLevel[globals.currentLevel] &&
+                Time.time - globals.lastCloneTime > 1)
             {
 
                 //make a clone of the  player that will replay the movements that were just done
@@ -138,6 +159,13 @@ public class playerController : MonoBehaviour
                 //changeToTransparent();
                 body.velocity = Vector3.zero;
                 CancelInvoke("trackPos");
+
+                var skins = globals.robotSkins;
+
+                var render = this.transform.Find("ToonBot(Free)/robotMesh").GetComponent<Renderer>();
+                render.material.color = skins[globalFloor.robotCount % skins.Length];
+                globalFloor.robotCount++;
+
 
                 //using a for loop because I have been burned in the past from untiy not allowing me to stop a while loop
                 //during run time and crashing the program
@@ -158,6 +186,7 @@ public class playerController : MonoBehaviour
                 }
 
                 globals.reactivateObjects();
+                globals.lastCloneTime = Time.time;
 
 
             }
@@ -172,10 +201,10 @@ public class playerController : MonoBehaviour
     void replayMovements()
     {
         //playback movements 
-        if (currentFrame < positionRecordings.Count)
+        body.position = this.positionRecordings[currentFrame].Item1;
+        body.rotation = this.positionRecordings[currentFrame].Item2;
+        if (currentFrame < positionRecordings.Count - 1)
         {
-            body.position = this.positionRecordings[currentFrame].Item1;
-            body.rotation = this.positionRecordings[currentFrame].Item2;
             //Debug.Log("current frame: " + currentFrame + " " + positionRecordings[currentFrame]);
             currentFrame++;
 

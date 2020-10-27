@@ -23,10 +23,10 @@ public class ExitDoorScript : MonoBehaviour
         //Debug.Log("triggered button");
         //isTriggered = false;
 
-        if (other.gameObject.layer == 8 && pressCooldown == 0)
+        if (other.gameObject.layer == 8)
         {
             //TODO: go to next level
-            other.gameObject.GetComponent<Rigidbody>().velocity += new Vector3(0, 50, 0);
+            other.gameObject.GetComponent<Rigidbody>().position += new Vector3(0, 50, 0);
             Debug.Log("triggered");
 
         }
