@@ -78,7 +78,7 @@ public class playerController : MonoBehaviour
         //controls for the robot the player is currently controlling
         //var speed = 700.0f * Time.deltaTime;
         var speed = 7.0f;
-        body.velocity = new Vector3(0, 0, 0);
+        body.velocity = new Vector3(0, body.velocity.y, 0);
 
         if (Input.GetKey(KeyCode.W))
         {
@@ -110,7 +110,9 @@ public class playerController : MonoBehaviour
 
         }
 
-
+        //extra gravity 
+        //body.velocity += new Vector3(0, -1000, 0);
+        //Debug.Log("velocity: " + body.velocity);
 
         //body.velocity = new Vector3(Mathf.Min(body.velocity.x, speed), 0, Mathf.Min(body.velocity.z, speed * 2));
 
