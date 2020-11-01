@@ -38,7 +38,19 @@ public class globals : MonoBehaviour
         var camPos = Camera.main.transform.position;
         curPlayerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         var curPlayerPos = curPlayerTransform.position;
-        cameraOffset = new Vector3(camPos.x - curPlayerPos.x, camPos.y - curPlayerPos.y, camPos.z - curPlayerPos.z);
+
+        //tweak this if the camera angle wants to be adjusted from within the editor
+        //cameraOffset = new Vector3(camPos.x - curPlayerPos.x, camPos.y - curPlayerPos.y, camPos.z - curPlayerPos.z);
+        cameraOffset = new Vector3(0.8f, 7.2f, -10.6f);
+
+
+        Debug.Log("cameraOffset " + cameraOffset);
+        //Debug.Log("cameraRotation " + Camera.main.transform.rotation);
+        //Camera.main.transform.LookAt(GameObject.Find("Robot").transform);
+        Camera.main.transform.rotation = Quaternion.Euler(33, 0, 0);
+
+
+
 
         //Debug.Log(cameraOffset);
         //good offset is (0.9, 9.3, -11.3)

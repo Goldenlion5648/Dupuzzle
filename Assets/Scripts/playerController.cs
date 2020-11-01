@@ -79,6 +79,7 @@ public class playerController : MonoBehaviour
         //var speed = 700.0f * Time.deltaTime;
         var speed = 7.0f;
         body.velocity = new Vector3(0, body.velocity.y, 0);
+        //body.velocity = new Vector3(0, 0, 0);
 
         if (Input.GetKey(KeyCode.W))
         {
@@ -158,6 +159,7 @@ public class playerController : MonoBehaviour
                 //make a clone of the  player that will replay the movements that were just done
                 var newCopy = Instantiate(robotPrefab, positionRecordings[0].Item1, Quaternion.identity);
                 this.isMaster = false;
+                body.useGravity = false;
                 //changeToTransparent();
                 body.velocity = Vector3.zero;
                 CancelInvoke("trackPos");
