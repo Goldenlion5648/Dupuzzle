@@ -19,12 +19,17 @@ public class globals : MonoBehaviour
 
     public static List<(float, int)> teleporterUseTime = new List<(float, int)>();
 
-    public static Dictionary<int, int> robotsPerLevel = new Dictionary<int, int>()
-    {
-        { 1,4 },
-        { 2,3 },
-        { 3,4 },
-    };
+    //public static string[] levelOrder =
+    //    {
+    //""
+    //}
+
+    //public static Dictionary<int, int> robotsPerLevel = new Dictionary<int, int>()
+    //{
+    //    { 1,4 },
+    //    { 2,3 },
+    //    { 3,4 },
+    //};
     // Start is called before the first frame update
     void Start()
     {

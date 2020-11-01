@@ -152,8 +152,10 @@ public class playerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             var globalFloor = GameObject.Find("LevelLayout").GetComponentInChildren<globals>();
-            if (globalFloor.robotCount + 1 <= globals.robotsPerLevel[globals.currentLevel] &&
+            var robotsAllowed = GameObject.Find("ExitDoor").GetComponent<levelScript>().totalRobotsAllowed;
+            if (globalFloor.robotCount + 1 <= robotsAllowed &&
                 Time.time - globals.lastCloneTime > 1)
+            //if (robotsAllowed.totalRobotsAllowed + 1)
             {
 
                 //make a clone of the  player that will replay the movements that were just done
