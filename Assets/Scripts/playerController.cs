@@ -27,7 +27,7 @@ public class playerController : MonoBehaviour
     void Start()
     {
         body = transform.GetComponent<Rigidbody>();
-        InvokeRepeating("trackPos", 0, posRecordFrequency);
+        InvokeRepeating("trackPos", 0.1f, posRecordFrequency);
         if (isMaster == false)
         {
             transform.position = positionRecordings[0].Item1;
@@ -73,6 +73,9 @@ public class playerController : MonoBehaviour
 
     void movement()
     {
+        //Debug.Log("velocity Y" + body.velocity.y);
+
+
         if (Time.time < .5)
             return;
         //controls for the robot the player is currently controlling
@@ -80,6 +83,11 @@ public class playerController : MonoBehaviour
         var speed = 7.0f;
         body.velocity = new Vector3(0, body.velocity.y, 0);
         //body.velocity = new Vector3(0, 0, 0);
+
+        if (Mathf.Abs(body.velocity.y) > 1)
+        {
+            return;
+        }
 
         if (Input.GetKey(KeyCode.W))
         {

@@ -276,7 +276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7243486309377718148, guid: 2546446cb40afee46a7488e22b93a00d, type: 3}
       propertyPath: totalRobotsAllowed
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2546446cb40afee46a7488e22b93a00d, type: 3}
@@ -297,7 +297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7907791122386154193, guid: a4b0f87561b63f245b2ebdc2ae21de91, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.71
+      value: 9.68
       objectReference: {fileID: 0}
     - target: {fileID: 7907791122386154193, guid: a4b0f87561b63f245b2ebdc2ae21de91, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1173,7 +1173,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6710115953728759635}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.58, y: 8.661507, z: -14.147027}
+  m_LocalPosition: {x: 10.58, y: 8.27, z: -14.147027}
   m_LocalScale: {x: 16, y: 1, z: 16}
   m_Children:
   - {fileID: 2056953307}

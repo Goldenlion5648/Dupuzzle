@@ -26,8 +26,8 @@ public class ExitDoorScript : MonoBehaviour
         if (other.gameObject.layer == 8)
         {
             //TODO: go to next level
-            other.gameObject.GetComponent<Rigidbody>().position += new Vector3(0, 50, 0);
             Debug.Log("triggered");
+            other.gameObject.GetComponent<Rigidbody>().position += new Vector3(0, 50, 0);
 
         }
 
