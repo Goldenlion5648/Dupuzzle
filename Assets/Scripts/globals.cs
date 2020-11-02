@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class globals : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class globals : MonoBehaviour
 
     public int robotCount = 1;
     public static int currentLevel = 1;
-    public static Vector3 cameraOffset;
+    public static Vector3 cameraOffset = new Vector3(0.8f, 7.2f, -10.6f);
     public static Transform curPlayerTransform;
 
     public static float lastCloneTime = -1;
@@ -19,10 +20,9 @@ public class globals : MonoBehaviour
 
     public static List<(float, int)> teleporterUseTime = new List<(float, int)>();
 
-    //public static string[] levelOrder =
-    //    {
-    //""
-    //}
+    public static List<string> levelOrder = new List<string>();
+
+
 
     //public static Dictionary<int, int> robotsPerLevel = new Dictionary<int, int>()
     //{
@@ -33,6 +33,14 @@ public class globals : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //this is the order that the levels will be played
+        levelOrder.Add("ButtonTutorial");
+        levelOrder.Add("TeleporterTutorial");
+        levelOrder.Add("BridgeGaps");
+
+
+
+
         //robotSkins[1].a = 3;
         //Debug.Log("ran");
         for (int i = 0; i < robotSkins.Length; i++)
@@ -46,7 +54,7 @@ public class globals : MonoBehaviour
 
         //tweak this if the camera angle wants to be adjusted from within the editor
         //cameraOffset = new Vector3(camPos.x - curPlayerPos.x, camPos.y - curPlayerPos.y, camPos.z - curPlayerPos.z);
-        cameraOffset = new Vector3(0.8f, 7.2f, -10.6f);
+        //cameraOffset 
 
 
         Debug.Log("cameraOffset " + cameraOffset);

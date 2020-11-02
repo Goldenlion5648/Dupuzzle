@@ -714,6 +714,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2546446cb40afee46a7488e22b93a00d, type: 3}
+--- !u!1 &1023675645 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3427530730994823413, guid: 2546446cb40afee46a7488e22b93a00d, type: 3}
+  m_PrefabInstance: {fileID: 1023675644}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1023675646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023675645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 563c6aa2a03c70c459726309727587b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  robotCount: 1
 --- !u!1001 &1051921377
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1175,7 +1193,6 @@ GameObject:
   - component: {fileID: 1489827261359698918}
   - component: {fileID: 1489827261359698919}
   - component: {fileID: 1489827261359698916}
-  - component: {fileID: 6702619971025974038}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -1355,19 +1372,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03b2aabbcbba4fc45a779d9d47c4e5a2, type: 3}
---- !u!114 &6702619971025974038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1489827261359698917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 563c6aa2a03c70c459726309727587b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  robotCount: 1
 --- !u!1 &6710115952482755574
 GameObject:
   m_ObjectHideFlags: 0

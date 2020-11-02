@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ExitDoorScript : MonoBehaviour
 {
@@ -27,7 +28,14 @@ public class ExitDoorScript : MonoBehaviour
         {
             //TODO: go to next level
             Debug.Log("triggered");
-            other.gameObject.GetComponent<Rigidbody>().position += new Vector3(0, 50, 0);
+            //other.gameObject.GetComponent<Rigidbody>().position += new Vector3(0, 50, 0);
+            var currentLevel = SceneManager.GetActiveScene().name;
+            Debug.Log("just finished " + currentLevel);
+
+            int curLevelIndex = globals.levelOrder.IndexOf(currentLevel);
+            Debug.Log("index was " + curLevelIndex);
+
+            SceneManager.LoadScene(globals.levelOrder[curLevelIndex + 1]);
 
         }
 

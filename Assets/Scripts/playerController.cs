@@ -159,9 +159,9 @@ public class playerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            var globalFloor = GameObject.Find("LevelLayout").GetComponentInChildren<globals>();
-            var robotsAllowed = GameObject.Find("ExitDoor").GetComponent<levelScript>().totalRobotsAllowed;
-            if (globalFloor.robotCount + 1 <= robotsAllowed &&
+            var globalFloor = GameObject.Find("ExitDoor").GetComponent<globals>();
+            var robotsAllowed = GameObject.Find("ExitDoor").GetComponent<levelScript>();
+            if (robotsAllowed.robotsSoFar + 1 <= robotsAllowed.totalRobotsAllowed &&
                 Time.time - globals.lastCloneTime > 1)
             //if (robotsAllowed.totalRobotsAllowed + 1)
             {
