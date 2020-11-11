@@ -179,6 +179,8 @@ public class playerController : MonoBehaviour
                 var render = this.transform.Find("ToonBot(Free)/robotMesh").GetComponent<Renderer>();
                 render.material.color = skins[globalFloor.robotCount % skins.Length];
                 globalFloor.robotCount++;
+                robotsAllowed.robotsSoFar += 1;
+
 
 
                 //using a for loop because I have been burned in the past from untiy not allowing me to stop a while loop

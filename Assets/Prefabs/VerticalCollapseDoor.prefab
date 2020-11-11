@@ -109,4 +109,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationSpeedX: 0.3
-  animationSpeedY: 0.1
+  animationSpeedY: 0
