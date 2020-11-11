@@ -276,7 +276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7243486309377718148, guid: 2546446cb40afee46a7488e22b93a00d, type: 3}
       propertyPath: totalRobotsAllowed
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2546446cb40afee46a7488e22b93a00d, type: 3}

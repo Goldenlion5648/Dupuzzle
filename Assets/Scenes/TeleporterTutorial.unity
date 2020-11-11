@@ -298,10 +298,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3845317191234920891, guid: c4302574186279a4090bba66a92fbec4, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 6.754
-      objectReference: {fileID: 0}
     - target: {fileID: 3845317191234920895, guid: c4302574186279a4090bba66a92fbec4, type: 3}
       propertyPath: m_Name
       value: VerticalCollapseDoor (1)
@@ -951,7 +947,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3845317191234920891, guid: c4302574186279a4090bba66a92fbec4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.993249
+      value: -8.49
       objectReference: {fileID: 0}
     - target: {fileID: 3845317191234920891, guid: c4302574186279a4090bba66a92fbec4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -959,7 +955,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3845317191234920891, guid: c4302574186279a4090bba66a92fbec4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.09
+      value: 6.22
       objectReference: {fileID: 0}
     - target: {fileID: 3845317191234920891, guid: c4302574186279a4090bba66a92fbec4, type: 3}
       propertyPath: m_LocalRotation.x
@@ -995,7 +991,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3845317191234920891, guid: c4302574186279a4090bba66a92fbec4, type: 3}
       propertyPath: m_LocalScale.z
-      value: 6.2412
+      value: 5.7657337
       objectReference: {fileID: 0}
     - target: {fileID: 3845317191234920895, guid: c4302574186279a4090bba66a92fbec4, type: 3}
       propertyPath: m_Name
@@ -1227,7 +1223,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b6f610610e319ed4f90e39b300ecabf1, type: 2}
+  - {fileID: 2100000, guid: 4fb8f5242c9a3ee478e3c0e265d7426e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

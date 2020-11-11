@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CustomGradient
   m_EditorClassIdentifier: 
   colorMode: 1
-  topLeft: {r: 0.06666666, g: 0.13117531, b: 0.6784314, a: 1}
-  topRight: {r: 0.06666666, g: 0.39413077, b: 0.6784314, a: 1}
-  bottomLeft: {r: 0.06666666, g: 0.13117531, b: 0.6784314, a: 1}
-  bottomRight: {r: 0.06666666, g: 0.39413077, b: 0.6784314, a: 1}
+  topLeft: {r: 0, g: 0.080309436, b: 0.7830189, a: 1}
+  topRight: {r: 0.019607835, g: 0.407723, b: 0.6117647, a: 1}
+  bottomLeft: {r: 0, g: 0.080309436, b: 0.7830189, a: 1}
+  bottomRight: {r: 0.019607835, g: 0.407723, b: 0.6117647, a: 1}
