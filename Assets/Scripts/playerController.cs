@@ -159,7 +159,7 @@ public class playerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            var globalFloor = GameObject.Find("ExitDoor").GetComponent<globals>();
+            //var globalFloor = GameObject.Find("ExitDoor").GetComponent<globals>();
             var robotsAllowed = GameObject.Find("ExitDoor").GetComponent<levelScript>();
             if (robotsAllowed.robotsSoFar + 1 <= robotsAllowed.totalRobotsAllowed &&
                 Time.time - globals.lastCloneTime > 1)
@@ -177,8 +177,8 @@ public class playerController : MonoBehaviour
                 var skins = globals.robotSkins;
 
                 var render = this.transform.Find("ToonBot(Free)/robotMesh").GetComponent<Renderer>();
-                render.material.color = skins[globalFloor.robotCount % skins.Length];
-                globalFloor.robotCount++;
+                render.material.color = skins[robotsAllowed.robotsSoFar % skins.Length];
+                //globalFloor.robotCount++;
                 robotsAllowed.robotsSoFar += 1;
 
 

@@ -15,6 +15,8 @@ public class globals : MonoBehaviour
     public static Transform curPlayerTransform;
 
     public static float lastCloneTime = -1;
+    public static int timeOnLevel = 0;
+
 
     public static List<GameObject> objectsToActive = new List<GameObject>();
 
@@ -22,7 +24,9 @@ public class globals : MonoBehaviour
 
     public static List<string> levelOrder = new List<string>();
 
+    AudioSource shouldResetAudioSource;
 
+    public static bool isPlayingResetAudio;
 
     //public static Dictionary<int, int> robotsPerLevel = new Dictionary<int, int>()
     //{
@@ -37,6 +41,9 @@ public class globals : MonoBehaviour
         levelOrder.Add("ButtonTutorial");
         levelOrder.Add("TeleporterTutorial");
         levelOrder.Add("BridgeGaps");
+        InvokeRepeating("addToTimeOnLevel", 1, 1);
+
+        shouldResetAudioSource = GetComponent<AudioSource>();
 
 
 
@@ -64,11 +71,22 @@ public class globals : MonoBehaviour
         Camera.main.transform.rotation = Quaternion.Euler(33, 0, 0);
 
 
-
-
         //Debug.Log(cameraOffset);
         //good offset is (0.9, 9.3, -11.3)
 
+    }
+
+    void addToTimeOnLevel()
+    {
+        timeOnLevel += 1;
+        if (timeOnLevel % 5 == 0 && timeOnLevel != 0 && shouldResetAudioSource.isPlaying == false &&
+            GetComponent<levelScript>().robotsSoFar == GetComponent<levelScript>().totalRobotsAllowed &&
+            Time.time - lastCloneTime > 15)
+        {
+            shouldResetAudioSource.Play();
+
+        }
+        isPlayingResetAudio = shouldResetAudioSource.isPlaying;
     }
 
     void trackTeleporterUseTime()
