@@ -1,16 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class keepBetweenScenes : MonoBehaviour
 {
     private AudioSource _audio;
+    static bool isRunning = false;
+
+    public bool playMusicFromScript;
 
     private void Awake()
     {
-        DontDestroyOnLoad(transform.gameObject);
-        _audio = GetComponent<AudioSource>();
+        //if (SceneManager.GetActiveScene().)
+        if (isRunning == false)
+        {
 
+            DontDestroyOnLoad(transform.gameObject);
+            _audio = GetComponent<AudioSource>();
+            if (playMusicFromScript)
+                playMusic();
+            isRunning = true;
+        }
     }
 
     public void playMusic()

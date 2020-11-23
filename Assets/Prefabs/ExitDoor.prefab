@@ -306,6 +306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7174456848973048579}
   - component: {fileID: 7243486309377718148}
+  - component: {fileID: 4589668038477484011}
   m_Layer: 0
   m_Name: ExitDoor
   m_TagString: Untagged
@@ -345,6 +346,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalRobotsAllowed: 0
   robotsSoFar: 0
+--- !u!114 &4589668038477484011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3427530730994823413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 563c6aa2a03c70c459726309727587b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  robotCount: 1
 --- !u!1001 &1163895494252941574
 PrefabInstance:
   m_ObjectHideFlags: 0

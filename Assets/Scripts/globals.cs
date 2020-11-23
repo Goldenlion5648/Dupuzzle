@@ -50,6 +50,7 @@ public class globals : MonoBehaviour
 
         var camPos = Camera.main.transform.position;
         curPlayerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+
         var curPlayerPos = curPlayerTransform.position;
 
         //tweak this if the camera angle wants to be adjusted from within the editor
