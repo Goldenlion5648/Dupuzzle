@@ -36,7 +36,7 @@ public class ExitDoorScript : MonoBehaviour
             InvokeRepeating("launchUp", 0, .1f);
             other.transform.GetComponent<Rigidbody>().useGravity = false;
 
-            Invoke("goToNextLevel", 3);
+            Invoke("goToNextLevel", 2.2f);
 
         }
 

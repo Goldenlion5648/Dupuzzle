@@ -23,8 +23,9 @@ public class animateTexture : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        curXOffset = (curXOffset + animationSpeedX * Time.deltaTime) % render.material.mainTextureScale.x;
-        curYOffset = (curYOffset + animationSpeedY * Time.deltaTime) % render.material.mainTextureScale.y;
+        curXOffset = (curXOffset + animationSpeedX * Time.deltaTime);
+        if (animationSpeedY != 0f)
+            curYOffset = (curYOffset + animationSpeedY * Time.deltaTime) % render.material.mainTextureScale.y;
         var offset = new Vector2(curXOffset, curYOffset);
 
         render.material.SetTextureOffset("_MainTex", offset);
