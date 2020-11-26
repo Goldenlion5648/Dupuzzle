@@ -8,7 +8,7 @@ public class titleScript : MonoBehaviour
 
     public void startGame()
     {
-        SceneManager.LoadScene("ButtonTutorial");
+        SceneManager.LoadScene("Intro");
     }
     public void optionsMenu()
     {

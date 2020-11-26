@@ -6,9 +6,11 @@ public class giveVoiceHint : MonoBehaviour
 {
 
     AudioSource hint;
-    int hintDelay = 5;
+    public float hintDelay = 10;
     float startTime;
     public static bool isPlayingHint;
+
+    public bool checkCloneCount;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,9 +27,20 @@ public class giveVoiceHint : MonoBehaviour
         //Debug.Log("hintDelay " + hintDelay);
         var g = GameObject.Find("ExitDoor");
 
-        if (Time.time - startTime > hintDelay && hint.isPlaying == false &&
-            globals.isPlayingResetAudio == false && g.GetComponent<levelScript>().robotsSoFar == 1)
+        //Debug.Log("start " + startTime);
+        //Debug.Log("Time: " + Time.time);
+        //Debug.Log("HintDelay: " + hintDelay);
+
+
+        //Debug.Log("Check clone count" + checkCloneCount);
+
+        if (Mathf.Abs(Time.time - startTime) > hintDelay && hint.isPlaying == false &&
+            globals.isPlayingResetAudio == false)
         {
+            if (checkCloneCount && g.GetComponent<levelScript>().robotsSoFar != 1)
+            {
+                return;
+            }
             hint.Play();
             if (hint.clip.length - hint.time < 1)
             {
@@ -36,6 +49,8 @@ public class giveVoiceHint : MonoBehaviour
             }
         }
         isPlayingHint = hint.isPlaying;
+        if (isPlayingHint)
+            startTime = Time.time;
     }
 
     // Update is called once per frame

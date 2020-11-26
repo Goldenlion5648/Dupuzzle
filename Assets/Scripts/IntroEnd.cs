@@ -8,6 +8,9 @@ public class IntroEnd : MonoBehaviour
     AudioSource intro;
 
     bool hasLetDownWalls = false;
+    public GameObject light;
+
+    private float startIntroTime;
 
 
     // Start is called before the first frame update
@@ -16,6 +19,9 @@ public class IntroEnd : MonoBehaviour
         intro = GameObject.Find("IntroAudio").GetComponent<AudioSource>();
         var introLength = intro.clip.length;
         Debug.Log("intro length " + introLength);
+
+        startIntroTime = Time.time;
+        Debug.Log(startIntroTime);
 
 
         //Invoke("startLevel", introLength + 1.5f);
@@ -31,13 +37,15 @@ public class IntroEnd : MonoBehaviour
             item.SetActive(false);
 
         }
+        light.SetActive(true);
+
     }
 
     // Update is called once per frame
     void Update()
     {
         //Debug.Log("time in audio " + intro.time);
-        if (hasLetDownWalls == false && intro.isPlaying == false)
+        if (hasLetDownWalls == false && intro.isPlaying == false && Time.time - startIntroTime > 5)
         {
             startLevel();
             hasLetDownWalls = true;

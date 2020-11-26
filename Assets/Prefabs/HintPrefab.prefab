@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1100253517158565348}
   - component: {fileID: 6779436710864674926}
   m_Layer: 0
-  m_Name: VoiceHint
+  m_Name: UseCloneHint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa3549c49a1208f41848fb5dd3edd4c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hint: {fileID: 7594102937699718658, guid: f118db21e0ee0184f9c58e2961f971cf, type: 3}
 --- !u!82 &6779436710864674926
 AudioSource:
   m_ObjectHideFlags: 0
@@ -56,7 +55,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

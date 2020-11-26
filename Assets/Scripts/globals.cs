@@ -28,6 +28,8 @@ public class globals : MonoBehaviour
 
     public static bool isPlayingResetAudio;
 
+    float lastResetWarnTime = -1;
+
     //public static Dictionary<int, int> robotsPerLevel = new Dictionary<int, int>()
     //{
     //    { 1,4 },
@@ -81,12 +83,17 @@ public class globals : MonoBehaviour
         timeOnLevel += 1;
         if (timeOnLevel % 5 == 0 && timeOnLevel != 0 && shouldResetAudioSource.isPlaying == false &&
             GetComponent<levelScript>().robotsSoFar == GetComponent<levelScript>().totalRobotsAllowed &&
-            Time.time - lastCloneTime > 15)
+            Time.time - lastCloneTime > 20 && Time.time - lastResetWarnTime > 15)
         {
             shouldResetAudioSource.Play();
 
         }
         isPlayingResetAudio = shouldResetAudioSource.isPlaying;
+        //Debug.Log("time on level: " + timeOnLevel);
+
+        if (isPlayingResetAudio)
+            lastResetWarnTime = Time.time;
+
     }
 
     void trackTeleporterUseTime()
@@ -107,6 +114,6 @@ public class globals : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //Debug.Log("time on level: " + timeOnLevel);
     }
 }

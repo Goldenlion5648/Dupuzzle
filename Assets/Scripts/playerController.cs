@@ -24,6 +24,8 @@ public class playerController : MonoBehaviour
 
     private bool hasChangedToTransparent = false;
 
+
+
     void Start()
     {
         body = transform.GetComponent<Rigidbody>();
@@ -118,6 +120,8 @@ public class playerController : MonoBehaviour
             robotTransform.rotation = Quaternion.Euler(0, 90, 0);
 
         }
+
+        
 
         //extra gravity 
         //body.velocity += new Vector3(0, -1000, 0);
@@ -233,10 +237,10 @@ public class playerController : MonoBehaviour
                 finishedReplaying = true;
                 //Debug.Log("printing " + positionRecordings.Count + " things");
 
-                foreach (var item in positionRecordings)
-                {
-                    //Debug.Log(item);
-                }
+                //foreach (var item in positionRecordings)
+                //{
+                //    //Debug.Log(item);
+                //}
             }
         }
         //Debug.Log("Frame num: " + currentFrame);
