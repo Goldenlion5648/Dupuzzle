@@ -42,11 +42,7 @@ public class giveVoiceHint : MonoBehaviour
                 return;
             }
             hint.Play();
-            if (hint.clip.length - hint.time < 1)
-            {
-                startTime = Time.time;
-                hintDelay += 5;
-            }
+            hintDelay = (hintDelay * 3) / 2;
         }
         isPlayingHint = hint.isPlaying;
         if (isPlayingHint)

@@ -30,6 +30,8 @@ public class globals : MonoBehaviour
 
     float lastResetWarnTime = -1;
 
+    public bool adjustCameraAtStart = true;
+
     //public static Dictionary<int, int> robotsPerLevel = new Dictionary<int, int>()
     //{
     //    { 1,4 },
@@ -43,6 +45,8 @@ public class globals : MonoBehaviour
         levelOrder.Add("ButtonTutorial");
         levelOrder.Add("TeleporterTutorial");
         levelOrder.Add("BridgeGaps");
+        levelOrder.Add("EndScreen");
+        levelOrder.Add("TitleScreen");
         InvokeRepeating("addToTimeOnLevel", 1, 1);
 
         shouldResetAudioSource = GetComponent<AudioSource>();
@@ -67,10 +71,15 @@ public class globals : MonoBehaviour
         //cameraOffset 
 
 
-        Debug.Log("cameraOffset " + cameraOffset);
+        //Debug.Log("cameraOffset " + cameraOffset);
         //Debug.Log("cameraRotation " + Camera.main.transform.rotation);
         //Camera.main.transform.LookAt(GameObject.Find("Robot").transform);
-        Camera.main.transform.rotation = Quaternion.Euler(33, 0, 0);
+
+        if (adjustCameraAtStart)
+        {
+            Camera.main.transform.rotation = Quaternion.Euler(33, 0, 0);
+
+        }
 
 
         //Debug.Log(cameraOffset);
@@ -80,10 +89,15 @@ public class globals : MonoBehaviour
 
     void addToTimeOnLevel()
     {
+        var hintPrefab = GameObject.Find("UseCloneHint");
+        if (hintPrefab == null)
+            hintPrefab = GameObject.Find("HintPrefab");
+
         timeOnLevel += 1;
-        if (timeOnLevel % 5 == 0 && timeOnLevel != 0 && shouldResetAudioSource.isPlaying == false &&
+        if (timeOnLevel != 0 && shouldResetAudioSource.isPlaying == false &&
             GetComponent<levelScript>().robotsSoFar == GetComponent<levelScript>().totalRobotsAllowed &&
-            Time.time - lastCloneTime > 20 && Time.time - lastResetWarnTime > 15)
+            Time.time - lastCloneTime > 20 && Time.time - lastResetWarnTime > 15 &&
+            hintPrefab.GetComponent<AudioSource>().isPlaying == false)
         {
             shouldResetAudioSource.Play();
 

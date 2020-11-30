@@ -6,8 +6,10 @@ public class textHover : MonoBehaviour
 {
     float upperBound;
     float lowerBound;
-    float moveAmount = 1;
-    float changeByAmount = .2f;
+    public float moveAmount = 1;
+    public float changeByAmount = .2f;
+    public float zMoveAmount = 0;
+    public float zMoveBound = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,13 +33,20 @@ public class textHover : MonoBehaviour
             //GetComponent<RectTransform>().position += new Vector3(0, moveAmount * Time.deltaTime, 0);
             moveAmount += changeByAmount;
         }
+
+        if (zMoveAmount != 0)
+        {
+            if (transform.position.z + zMoveAmount > zMoveBound)
+            {
+
+                GetComponent<RectTransform>().position += new Vector3(0, 0, zMoveAmount * Time.deltaTime);
+            }
+        }
         //else
         //Debug.Log("Move amount " + moveAmount);
 
-        {
-            GetComponent<RectTransform>().position += new Vector3(0, moveAmount * Time.deltaTime, 0);
-            //moveAmount += 3;
-        }
+        GetComponent<RectTransform>().position += new Vector3(0, moveAmount * Time.deltaTime, 0);
+        //moveAmount += 3;
 
     }
 }

@@ -30,6 +30,18 @@ public class keepBetweenScenes : MonoBehaviour
             return;
         _audio.Play();
     }
+
+    public void pauseMusic()
+    {
+        if (_audio.isPlaying)
+        {
+            _audio.Pause();
+        }
+        else
+        {
+            _audio.UnPause();
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +51,15 @@ public class keepBetweenScenes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            pauseMusic();
+        }
 
+        if (SceneManager.GetActiveScene().name == "EndScreen")
+        {
+            Destroy(transform.gameObject);
+
+        }
     }
 }

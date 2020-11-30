@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: checkCloneCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1100253517158565348, guid: 92cdada0406399a4bb5e9efd660aad1b, type: 3}
+      propertyPath: hintDelay
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1100253517158565349, guid: 92cdada0406399a4bb5e9efd660aad1b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.71826696
@@ -185,7 +189,7 @@ PrefabInstance:
     - target: {fileID: 6779436710864674926, guid: 92cdada0406399a4bb5e9efd660aad1b, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: b94aef435cb3eaa438cfada64de29c70, type: 3}
+      objectReference: {fileID: 8300000, guid: 572394c5c71e90349afd99e622d46f55, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92cdada0406399a4bb5e9efd660aad1b, type: 3}
 --- !u!1001 &473695852

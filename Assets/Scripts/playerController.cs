@@ -26,6 +26,7 @@ public class playerController : MonoBehaviour
 
 
 
+
     void Start()
     {
         body = transform.GetComponent<Rigidbody>();
@@ -37,6 +38,8 @@ public class playerController : MonoBehaviour
             Debug.Log("Some how ran start when not master");
 
         }
+
+
 
 
         //Debug.Log("Color: " + this.transform.Find("ToonBot(Free)/robotMesh").GetComponent<Renderer>().material.color);
@@ -121,7 +124,6 @@ public class playerController : MonoBehaviour
 
         }
 
-        
 
         //extra gravity 
         //body.velocity += new Vector3(0, -1000, 0);

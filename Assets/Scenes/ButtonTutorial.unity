@@ -652,6 +652,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1100253517158565348, guid: 92cdada0406399a4bb5e9efd660aad1b, type: 3}
+      propertyPath: hintDelay
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1100253517158565348, guid: 92cdada0406399a4bb5e9efd660aad1b, type: 3}
+      propertyPath: checkCloneCount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1100253517158565349, guid: 92cdada0406399a4bb5e9efd660aad1b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.71826696
