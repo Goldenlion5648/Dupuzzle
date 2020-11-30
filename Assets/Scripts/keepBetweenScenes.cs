@@ -10,7 +10,7 @@ public class keepBetweenScenes : MonoBehaviour
 
     public bool playMusicFromScript;
 
-    private void Awake()
+    void Start()
     {
         //if (SceneManager.GetActiveScene().)
         if (isRunning == false)
@@ -43,10 +43,7 @@ public class keepBetweenScenes : MonoBehaviour
         }
     }
     // Start is called before the first frame update
-    void Start()
-    {
 
-    }
 
     // Update is called once per frame
     void Update()
@@ -56,10 +53,10 @@ public class keepBetweenScenes : MonoBehaviour
             pauseMusic();
         }
 
-        if (SceneManager.GetActiveScene().name == "EndScreen")
-        {
-            Destroy(transform.gameObject);
+        //if (SceneManager.GetActiveScene().name == "EndScreen")
+        //{
+        //    Destroy(transform.gameObject);
 
-        }
+        //}
     }
 }
