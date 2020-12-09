@@ -146,6 +146,12 @@ public class playerController : MonoBehaviour
             restartTime = 0;
         }
 
+        if (Input.GetKey(KeyCode.H))
+        {
+            var ob = GameObject.Find("VoiceHint").GetComponent<giveVoiceHint>();
+            ob.justPlayHint();
+        }
+
         //Debug.Log(robotTransform.rotation);
 
     }

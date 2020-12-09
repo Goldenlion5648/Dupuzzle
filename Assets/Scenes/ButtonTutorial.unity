@@ -654,7 +654,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1100253517158565348, guid: 92cdada0406399a4bb5e9efd660aad1b, type: 3}
       propertyPath: hintDelay
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1100253517158565348, guid: 92cdada0406399a4bb5e9efd660aad1b, type: 3}
       propertyPath: checkCloneCount

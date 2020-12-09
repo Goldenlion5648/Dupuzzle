@@ -184,7 +184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1100253517158565351, guid: 92cdada0406399a4bb5e9efd660aad1b, type: 3}
       propertyPath: m_Name
-      value: HintPrefab
+      value: VoiceHint
       objectReference: {fileID: 0}
     - target: {fileID: 6779436710864674926, guid: 92cdada0406399a4bb5e9efd660aad1b, type: 3}
       propertyPath: m_audioClip
@@ -848,6 +848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   robotCount: 1
+  adjustCameraAtStart: 1
 --- !u!1001 &1051921377
 PrefabInstance:
   m_ObjectHideFlags: 0

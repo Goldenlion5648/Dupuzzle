@@ -32,6 +32,7 @@ public class globals : MonoBehaviour
 
     public bool adjustCameraAtStart = true;
 
+
     //public static Dictionary<int, int> robotsPerLevel = new Dictionary<int, int>()
     //{
     //    { 1,4 },
@@ -41,12 +42,15 @@ public class globals : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         //this is the order that the levels will be played
         levelOrder.Add("ButtonTutorial");
         levelOrder.Add("TeleporterTutorial");
         levelOrder.Add("BridgeGaps");
         levelOrder.Add("EndScreen");
         levelOrder.Add("TitleScreen");
+
+
         InvokeRepeating("addToTimeOnLevel", 1, 1);
 
         shouldResetAudioSource = GetComponent<AudioSource>();

@@ -546,6 +546,7 @@ GameObject:
   - component: {fileID: 840940538}
   - component: {fileID: 840940537}
   - component: {fileID: 840940539}
+  - component: {fileID: 840940540}
   m_Layer: 0
   m_Name: IntroAudio
   m_TagString: Untagged
@@ -676,6 +677,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   secondsToDelayBy: 2
+--- !u!114 &840940540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840940536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f31a313772d1a447b43df097030d62c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playMusicFromScript: 0
 --- !u!1 &920740918
 GameObject:
   m_ObjectHideFlags: 0
@@ -1116,7 +1130,7 @@ MonoBehaviour:
   walls:
   - {fileID: 1730538268}
   - {fileID: 148822702}
-  light: {fileID: 1528251093}
+  _light: {fileID: 1833556141}
 --- !u!82 &1601316286
 AudioSource:
   m_ObjectHideFlags: 0

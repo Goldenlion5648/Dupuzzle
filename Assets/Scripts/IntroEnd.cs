@@ -8,7 +8,7 @@ public class IntroEnd : MonoBehaviour
     AudioSource intro;
 
     bool hasLetDownWalls = false;
-    public GameObject light;
+    public GameObject _light;
 
     private float startIntroTime;
 
@@ -37,7 +37,7 @@ public class IntroEnd : MonoBehaviour
             item.SetActive(false);
 
         }
-        light.SetActive(true);
+        _light.SetActive(true);
 
     }
 

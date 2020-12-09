@@ -3,27 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class keepBetweenScenes : MonoBehaviour
+public class continueIntroThroughReset : MonoBehaviour
 {
     private AudioSource _audio;
     static bool isRunning = false;
 
     public bool playMusicFromScript;
 
-    static keepBetweenScenes instance;
+    static continueIntroThroughReset instance2;
 
     private void Awake()
     {
-        if (instance == null)
+        if (instance2 == null)
         {
-            instance = this;
+            instance2 = this;
             DontDestroyOnLoad(transform.gameObject);
             _audio = GetComponent<AudioSource>();
             if (playMusicFromScript)
                 playMusic();
             isRunning = true;
         }
-        else if (instance != this)
+        else if (instance2 != this)
         {
             Destroy(gameObject);
 
@@ -69,9 +69,10 @@ public class keepBetweenScenes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (SceneManager.GetActiveScene().name != "Intro")
         {
-            pauseMusic();
+            Destroy(gameObject);
+
         }
 
         //if (SceneManager.GetActiveScene().name == "EndScreen")

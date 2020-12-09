@@ -1,16 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class giveVoiceHint : MonoBehaviour
 {
 
     AudioSource hint;
-    public float hintDelay = 10;
+    float hintDelay = 1;
     float startTime;
     public static bool isPlayingHint;
 
     public bool checkCloneCount;
+    bool hasPlayedHint = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,37 +24,39 @@ public class giveVoiceHint : MonoBehaviour
 
     }
 
-    void giveHint()
+    public void justPlayHint()
     {
-        //Debug.Log("hintDelay " + hintDelay);
-        var g = GameObject.Find("ExitDoor");
-
-        //Debug.Log("start " + startTime);
-        //Debug.Log("Time: " + Time.time);
-        //Debug.Log("HintDelay: " + hintDelay);
-
-
-        //Debug.Log("Check clone count" + checkCloneCount);
-
-        if (Mathf.Abs(Time.time - startTime) > hintDelay && hint.isPlaying == false &&
-            globals.isPlayingResetAudio == false)
+        hasPlayedHint = false;
+        if (hint.isPlaying == false)
         {
-            if (checkCloneCount && g.GetComponent<levelScript>().robotsSoFar != 1)
-            {
-                return;
-            }
             hint.Play();
-            hintDelay = (hintDelay * 3) / 2;
         }
-        isPlayingHint = hint.isPlaying;
-        if (isPlayingHint)
-            startTime = Time.time;
+
+        hasPlayedHint = true;
+    }
+
+    void hintCheck()
+    {
+
+        if (giveHintGlobal.giveHintsMenuChoice == true)
+        {
+
+            if (Time.time - startTime > hintDelay && hasPlayedHint == false && hint.isPlaying == false)
+            {
+                justPlayHint();
+            }
+
+        }
+        else
+        {
+            hasPlayedHint = true;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        giveHint();
+        hintCheck();
 
     }
 }
